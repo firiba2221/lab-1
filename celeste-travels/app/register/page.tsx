@@ -17,6 +17,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from '@/components/Link';
 import Logo from '@/components/Logo';
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 export default function RegisterPage() {
   return (
@@ -25,12 +26,17 @@ export default function RegisterPage() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justify: 'center',
-        bgcolor: 'grey.50',
+        justifyContent: 'center',
+        bgcolor: 'background.default',
         py: 6,
         px: 2,
+        position: 'relative',
       }}
     >
+      {/* Dark mode toggle */}
+      <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+        <DarkModeToggle />
+      </Box>
       <Container maxWidth="xs">
         <Paper
           elevation={0}

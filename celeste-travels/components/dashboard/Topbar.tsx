@@ -22,6 +22,7 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import HotelIcon from '@mui/icons-material/Hotel';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Link from '@/components/Link';
+import DarkModeToggle from '@/components/DarkModeToggle';
 import { usePathname } from 'next/navigation';
 
 const PAGE_TITLES: Record<string, string> = {
@@ -286,36 +287,40 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
           </Breadcrumbs>
         </Stack>
 
-        {/* Right side: Notification button */}
-        <IconButton
-          aria-describedby={id}
-          onClick={handleOpen}
-          size="small"
-          aria-label="notifications"
-          sx={{
-            bgcolor: 'background.paper',
-            border: '1px solid',
-            borderColor: 'divider',
-            borderRadius: 2,
-            p: 0.9,
-            position: 'relative',
-          }}
-        >
-          <NotificationsNoneIcon fontSize="small" />
-          {unreadCount > 0 && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 6,
-                right: 6,
-                width: 6,
-                height: 6,
-                bgcolor: 'error.main',
-                borderRadius: '50%',
-              }}
-            />
-          )}
-        </IconButton>
+        {/* Right side: Dark mode toggle + Notification button */}
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+          <DarkModeToggle />
+
+          <IconButton
+            aria-describedby={id}
+            onClick={handleOpen}
+            size="small"
+            aria-label="notifications"
+            sx={{
+              bgcolor: 'background.paper',
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: 2,
+              p: 0.9,
+              position: 'relative',
+            }}
+          >
+            <NotificationsNoneIcon fontSize="small" />
+            {unreadCount > 0 && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 6,
+                  right: 6,
+                  width: 6,
+                  height: 6,
+                  bgcolor: 'error.main',
+                  borderRadius: '50%',
+                }}
+              />
+            )}
+          </IconButton>
+        </Stack>
 
         <NotificationPopover
           id={id}
