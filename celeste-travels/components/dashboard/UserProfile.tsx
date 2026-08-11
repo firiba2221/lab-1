@@ -123,7 +123,6 @@ export default function UserProfile({ collapsed = false }: UserProfileProps) {
             elevation: 0,
             sx: {
               width: 170,
-              borderRadius: 2,
               border: '1px solid',
               borderColor: 'divider',
               boxShadow: '0 8px 24px rgba(0,0,0,0.12)',

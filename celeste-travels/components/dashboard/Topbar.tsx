@@ -96,7 +96,6 @@ function NotificationPopover({
           elevation: 0,
           sx: {
             width: 340,
-            borderRadius: 3,
             border: '1px solid',
             borderColor: 'divider',
             boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
@@ -236,7 +235,6 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
                   display: { xs: 'none', md: 'flex' },
                   border: '1px solid',
                   borderColor: 'divider',
-                  borderRadius: 2,
                   p: 0.8,
                   color: 'text.secondary',
                   '&:hover': { color: 'text.primary', bgcolor: 'action.hover' },
@@ -260,7 +258,6 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
                 display: { xs: 'flex', md: 'none' },
                 border: '1px solid',
                 borderColor: 'divider',
-                borderRadius: 2,
                 p: 0.8,
               }}
             >
@@ -300,7 +297,6 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
               bgcolor: 'background.paper',
               border: '1px solid',
               borderColor: 'divider',
-              borderRadius: 2,
               p: 0.9,
               position: 'relative',
             }}

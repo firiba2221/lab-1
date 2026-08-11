@@ -42,7 +42,6 @@ export default function RegisterPage() {
           elevation={0}
           sx={{
             p: 4,
-            borderRadius: 3,
             border: '1px solid',
             borderColor: 'divider',
             boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
@@ -65,7 +64,7 @@ export default function RegisterPage() {
               fullWidth
               variant="outlined"
               startIcon={<GoogleIcon />}
-              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
+              sx={{ textTransform: 'none', borderColor: 'divider', color: 'text.primary' }}
             >
               Google
             </Button>
@@ -73,7 +72,7 @@ export default function RegisterPage() {
               fullWidth
               variant="outlined"
               startIcon={<GitHubIcon />}
-              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
+              sx={{ textTransform: 'none', borderColor: 'divider', color: 'text.primary' }}
             >
               GitHub
             </Button>
@@ -97,7 +96,7 @@ export default function RegisterPage() {
               autoFocus
               variant="outlined"
               size="small"
-              slotProps={{ input: { sx: { borderRadius: 2 } } }}
+
             />
             <TextField
               required
@@ -108,7 +107,7 @@ export default function RegisterPage() {
               autoComplete="email"
               variant="outlined"
               size="small"
-              slotProps={{ input: { sx: { borderRadius: 2 } } }}
+
             />
             <TextField
               required
@@ -120,7 +119,7 @@ export default function RegisterPage() {
               autoComplete="new-password"
               variant="outlined"
               size="small"
-              slotProps={{ input: { sx: { borderRadius: 2 } } }}
+
             />
 
             <FormControlLabel
@@ -148,7 +147,6 @@ export default function RegisterPage() {
               endIcon={<ArrowForwardIcon />}
               sx={{
                 py: 1.2,
-                borderRadius: 2,
                 textTransform: 'none',
                 fontWeight: 600,
                 fontSize: '0.925rem',

@@ -37,7 +37,7 @@ export default function DashboardLayout({
         display: 'flex',
         height: '100vh',
         overflow: 'hidden',
-        bgcolor: 'grey.50',
+        bgcolor: 'background.default',
       }}
     >
       {/* Desktop Sidebar */}
@@ -81,6 +81,7 @@ export default function DashboardLayout({
           sx={{
             flexGrow: 1,
             overflowY: 'auto',
+            bgcolor: 'background.default',
             p: { xs: 2, sm: 3, md: 4 },
           }}
         >

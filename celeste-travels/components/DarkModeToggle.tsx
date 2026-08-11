@@ -15,7 +15,6 @@ interface DarkModeToggleProps {
 export default function DarkModeToggle({ size = 'small' }: DarkModeToggleProps) {
   const { mode, setMode } = useColorScheme();
 
-  // Not yet hydrated — render nothing to avoid mismatch
   if (!mode) return null;
 
   const isDark = mode === 'dark';
@@ -33,7 +32,6 @@ export default function DarkModeToggle({ size = 'small' }: DarkModeToggleProps) 
         sx={{
           border: '1px solid',
           borderColor: 'divider',
-          borderRadius: 2,
           p: 0.9,
           color: 'text.secondary',
           bgcolor: 'background.paper',
