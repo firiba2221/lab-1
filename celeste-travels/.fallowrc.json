@@ -8,6 +8,7 @@
   "ignoreDependencies": [
     "@emotion/cache",
     "@emotion/styled",
+    "@playwright/test",
     "tailwindcss"
   ],
   "duplicates": {

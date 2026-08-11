@@ -1,0 +1,117 @@
+'use client';
+
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Tooltip from '@mui/material/Tooltip';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Link from '@/components/Link';
+
+interface UserProfileProps {
+  collapsed?: boolean;
+}
+
+export default function UserProfile({ collapsed = false }: UserProfileProps) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const avatarNode = (
+    <Avatar
+      alt="Riley Carter"
+      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+      sx={{ width: 36, height: 36 }}
+    />
+  );
+
+  return (
+    <Box sx={{ pt: 1 }}>
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: 'center',
+          justify: collapsed ? 'center' : 'space-between',
+        }}
+      >
+        {collapsed ? (
+          <Tooltip title="Riley Carter (riley@email.com)" placement="right" arrow>
+            <IconButton onClick={handleClick} size="small" sx={{ p: 0.5 }}>
+              {avatarNode}
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <>
+            <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+              {avatarNode}
+              <Box>
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.825rem', lineHeight: 1.2 }}>
+                  Riley Carter
+                </Typography>
+                <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.725rem' }}>
+                  riley@email.com
+                </Typography>
+              </Box>
+            </Stack>
+            <IconButton size="small" aria-label="user options" onClick={handleClick}>
+              <MoreVertIcon fontSize="small" color="action" />
+            </IconButton>
+          </>
+        )}
+      </Stack>
+
+      <Menu
+        id="profile-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        transformOrigin={{ horizontal: collapsed ? 'left' : 'right', vertical: 'bottom' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        slotProps={{
+          paper: {
+            elevation: 0,
+            sx: {
+              width: 170,
+              borderRadius: 2,
+              border: '1px solid',
+              borderColor: 'divider',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              mt: -1,
+            },
+          },
+        }}
+      >
+        <MenuItem onClick={handleClose} component={Link} href="/dashboard/settings">
+          <ListItemIcon>
+            <PersonOutlinedIcon fontSize="small" />
+          </ListItemIcon>
+          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+            View Profile
+          </Typography>
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={Link} href="/login">
+          <ListItemIcon>
+            <LogoutIcon fontSize="small" color="error" />
+          </ListItemIcon>
+          <Typography variant="body2" color="error" sx={{ fontWeight: 500 }}>
+            Logout
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
+  );
+}

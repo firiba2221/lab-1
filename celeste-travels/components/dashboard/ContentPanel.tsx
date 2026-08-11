@@ -1,0 +1,41 @@
+'use client';
+
+import React from 'react';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+
+interface ContentPanelProps {
+  title: string;
+  description: string;
+}
+
+export default function ContentPanel({ title, description }: ContentPanelProps) {
+  return (
+    <Box>
+      <Paper
+        elevation={0}
+        sx={{
+          p: 6,
+          borderRadius: 3,
+          border: '1px solid',
+          borderColor: 'divider',
+          bgcolor: 'background.paper',
+          textAlign: 'center',
+          minHeight: 400,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+          {title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 460 }}>
+          {description}
+        </Typography>
+      </Paper>
+    </Box>
+  );
+}
