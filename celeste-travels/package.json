@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fallow": "fallow",
+    "fallow:dead-code": "fallow dead-code",
+    "fallow:audit": "fallow audit"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -26,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
+    "fallow": "^3.14.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

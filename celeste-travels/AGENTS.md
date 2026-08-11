@@ -1,9 +1,35 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# AI Agent Rules & Guidelines (Celeste Travels)
 
-# This is NOT the Next.js you know
+## Fallow Codebase Hygiene & Quality Rules
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+All AI coding agents working on this codebase MUST strictly follow these rules and regulations for codebase cleanliness, dead code elimination, and structural health using **Fallow** (`fallow-rs/fallow`).
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+---
 
-<!-- END:nextjs-agent-rules -->
+### 1. Zero Dead Code Standard
+- **Always Audit with Fallow**: Before declaring any feature or refactor complete, run `npm run fallow` or `npx fallow`.
+- **Eliminate Unused Exports & Files**: Do not leave dead files, unused components, orphan functions, or unreferenced types in the codebase.
+- **Clean Dependencies**: Ensure all installed dependencies in `package.json` are used. Track and remove unused packages immediately unless explicitly ignored in `.fallowrc.json`.
+
+### 2. Code Duplication & Refactoring
+- **Avoid Copy-Paste Duplication**: Avoid duplicating complex logic, UI patterns, or helper functions across files.
+- **Reusable Architecture**: Extract repetitive logic into shared utility functions, custom React hooks, or reusable Material UI components.
+- **Fallow Duplication Checks**: Address duplication issues reported by `fallow dupes`.
+
+### 3. Maintainability & File Health
+- **Monitor Complexity**: Pay attention to Fallow's Maintainability Index (MI) and file health scores.
+- **Keep Components Focused**: Avoid large, monolithic files with high cyclomatic complexity. Modularize code into clean sub-modules when complexity increases.
+
+### 4. Pre-Commit / Pre-PR Verification
+- **Run Branch Audits**: Execute `npm run fallow:audit` to verify that modified files meet quality standards and introduce zero structural regressions.
+- **Verification Routine**: Always verify changes using:
+  ```bash
+  # Check full codebase health
+  npm run fallow
+
+  # Audit changed files
+  npm run fallow:audit
+
+  # Check dead code specifically
+  npm run fallow:dead-code
+  ```
