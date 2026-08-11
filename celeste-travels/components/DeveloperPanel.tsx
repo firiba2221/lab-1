@@ -99,16 +99,18 @@ export default function DeveloperPanel() {
   // Position styles: custom coordinates when dragged, default bottom-right fixed when untouched
   const fabPositionStyle = position
     ? {
-        position: 'fixed',
+        position: 'fixed' as const,
         left: `${position.x}px`,
         top: `${position.y}px`,
         bottom: 'auto',
         right: 'auto',
       }
     : {
-        position: 'fixed',
+        position: 'fixed' as const,
         bottom: 24,
         right: 24,
+        left: 'auto',
+        top: 'auto',
       };
 
   return (
