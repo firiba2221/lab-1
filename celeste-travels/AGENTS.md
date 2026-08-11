@@ -33,3 +33,8 @@ All AI coding agents working on this codebase MUST strictly follow these rules a
   # Check dead code specifically
   npm run fallow:dead-code
   ```
+
+---
+
+### 5. Playwright UI Testing Policy
+- **On-Demand Playwright Testing Only**: AI agents MUST ONLY run Playwright end-to-end UI tests (`npm run test:e2e` or `npx playwright test`) when explicitly requested by the user. Do NOT execute Playwright tests rapidly or automatically for routine edits unless the user explicitly asks to run UI tests.
