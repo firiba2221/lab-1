@@ -27,7 +27,6 @@ export default function DeveloperPanel() {
   const showPanelEnv = process.env.NEXT_PUBLIC_SHOW_DEV_PANEL === 'true';
   const [open, setOpen] = useState(false);
 
-  // If env flag is not set to true, do not render developer panel floating button
   if (!showPanelEnv) {
     return null;
   }
@@ -37,8 +36,8 @@ export default function DeveloperPanel() {
 
   return (
     <>
-      {/* Floating Developer Panel Action Button */}
-      <Tooltip title="Developer Panel" placement="right">
+      {/* Floating Developer Panel Action Button — anchored bottom-right so it never overlaps sidebar */}
+      <Tooltip title="Developer Panel" placement="left">
         <Fab
           color="primary"
           aria-label="open developer panel"
@@ -47,7 +46,7 @@ export default function DeveloperPanel() {
           sx={{
             position: 'fixed',
             bottom: 24,
-            left: 24,
+            right: 24,
             zIndex: 1200,
             boxShadow: '0 8px 24px rgba(37, 99, 235, 0.35)',
           }}
@@ -58,7 +57,7 @@ export default function DeveloperPanel() {
 
       {/* Developer Drawer Panel */}
       <Drawer
-        anchor="left"
+        anchor="right"
         open={open}
         onClose={handleClose}
         slotProps={{

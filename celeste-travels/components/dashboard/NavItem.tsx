@@ -55,7 +55,7 @@ function NavSubItemRow({ child, pathname }: { child: NavChild; pathname: string 
       sx={{
         display: 'flex',
         alignItems: 'center',
-        py: 0.8,
+        py: 0.75,
         px: 1.5,
         borderRadius: 1.5,
         textDecoration: 'none',
@@ -119,7 +119,7 @@ export default function NavItem({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justify: collapsed ? 'center' : 'space-between',
+        justifyContent: collapsed ? 'center' : 'space-between',
         gap: collapsed ? 0 : 1.5,
         width: collapsed ? 44 : '100%',
         height: collapsed ? 44 : 'auto',
@@ -140,7 +140,7 @@ export default function NavItem({
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit', minWidth: 20 }}>
           {icon}
         </Box>
         {!collapsed && (
@@ -169,7 +169,7 @@ export default function NavItem({
 
   if (collapsed) {
     return (
-      <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <Tooltip title={label} placement="right" arrow>
           {mainRow}
         </Tooltip>
@@ -190,7 +190,7 @@ export default function NavItem({
                   border: '1px solid',
                   borderColor: 'divider',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                  ml: 1,
+                  ml: 1.5,
                 },
               },
             }}
@@ -229,11 +229,11 @@ export default function NavItem({
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box
             sx={{
-              pl: 3.5,
               pt: 0.5,
               pb: 0.5,
-              ml: 2,
-              borderLeft: '1px solid',
+              pl: 2,
+              ml: 2.25,
+              borderLeft: '1.5px solid',
               borderColor: 'divider',
               display: 'flex',
               flexDirection: 'column',
