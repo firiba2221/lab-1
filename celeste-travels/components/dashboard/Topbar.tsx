@@ -27,9 +27,12 @@ import { usePathname } from 'next/navigation';
 
 const PAGE_TITLES: Record<string, string> = {
   '/dashboard': 'Home',
-  '/dashboard/page-01': 'Page 01',
-  '/dashboard/page-02': 'Page 02',
-  '/dashboard/page-03': 'Page 03',
+  '/dashboard/page-01': 'Subpage 1.1',
+  '/dashboard/page-01-sub2': 'Subpage 1.2',
+  '/dashboard/page-02': 'Subpage 2.1',
+  '/dashboard/page-02-sub2': 'Subpage 2.2',
+  '/dashboard/page-03': 'Subpage 3.1',
+  '/dashboard/page-03-sub2': 'Subpage 3.2',
   '/dashboard/settings': 'Settings',
 };
 
@@ -96,6 +99,7 @@ function NotificationPopover({
           elevation: 0,
           sx: {
             width: 340,
+            borderRadius: 2.5,
             border: '1px solid',
             borderColor: 'divider',
             boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
@@ -111,7 +115,7 @@ function NotificationPopover({
           px: 2.5,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justify: 'space-between',
           borderBottom: '1px solid',
           borderColor: 'divider',
           gap: 2,
@@ -176,9 +180,7 @@ function NotificationPopover({
 
 interface TopbarProps {
   onOpenMobile?: () => void;
-  /** Desktop: sidebar collapsed state — drives the toggle icon direction */
   sidebarCollapsed?: boolean;
-  /** Desktop: callback to toggle sidebar collapse */
   onToggleSidebar?: () => void;
 }
 
@@ -220,11 +222,9 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
       }}
     >
       <Stack direction="row" sx={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-
         {/* Left side: collapse toggle (desktop) | hamburger (mobile) | breadcrumbs */}
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-
-          {/* Desktop sidebar collapse/expand button — now lives in topbar */}
+          {/* Desktop sidebar collapse/expand button — no border */}
           {onToggleSidebar && (
             <Tooltip title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
               <IconButton
@@ -233,22 +233,21 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
                 size="small"
                 sx={{
                   display: { xs: 'none', md: 'flex' },
-                  border: '1px solid',
-                  borderColor: 'divider',
                   p: 0.8,
                   color: 'text.secondary',
                   '&:hover': { color: 'text.primary', bgcolor: 'action.hover' },
                 }}
               >
-                {sidebarCollapsed
-                  ? <ChevronRightIcon fontSize="small" />
-                  : <ChevronLeftIcon fontSize="small" />
-                }
+                {sidebarCollapsed ? (
+                  <ChevronRightIcon fontSize="small" />
+                ) : (
+                  <ChevronLeftIcon fontSize="small" />
+                )}
               </IconButton>
             </Tooltip>
           )}
 
-          {/* Mobile hamburger menu */}
+          {/* Mobile hamburger menu — no border */}
           {onOpenMobile && (
             <IconButton
               aria-label="open mobile drawer"
@@ -256,8 +255,6 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
               size="small"
               sx={{
                 display: { xs: 'flex', md: 'none' },
-                border: '1px solid',
-                borderColor: 'divider',
                 p: 0.8,
               }}
             >
@@ -284,7 +281,7 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
           </Breadcrumbs>
         </Stack>
 
-        {/* Right side: Dark mode toggle + Notification button */}
+        {/* Right side: Dark mode toggle + Notification button — no border */}
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
           <DarkModeToggle />
 
@@ -294,11 +291,14 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
             size="small"
             aria-label="notifications"
             sx={{
-              bgcolor: 'background.paper',
-              border: '1px solid',
-              borderColor: 'divider',
+              bgcolor: 'transparent',
               p: 0.9,
               position: 'relative',
+              color: 'text.secondary',
+              '&:hover': {
+                color: 'text.primary',
+                bgcolor: 'action.hover',
+              },
             }}
           >
             <NotificationsNoneIcon fontSize="small" />

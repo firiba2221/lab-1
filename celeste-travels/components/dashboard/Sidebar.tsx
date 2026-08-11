@@ -4,7 +4,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { usePathname } from 'next/navigation';
 
 import DashboardIcon from '@mui/icons-material/DashboardOutlined';
 import ArticleIcon from '@mui/icons-material/ArticleOutlined';
@@ -13,7 +12,7 @@ import BarChartIcon from '@mui/icons-material/BarChartOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
 
 import Logo from '@/components/Logo';
-import NavItem from './NavItem';
+import NavItem, { NavChild } from './NavItem';
 import UserProfile from './UserProfile';
 
 interface SidebarProps {
@@ -21,11 +20,39 @@ interface SidebarProps {
   isMobile?: boolean;
 }
 
-const navItems = [
+interface SidebarItemConfig {
+  label: string;
+  href?: string;
+  icon: React.ReactNode;
+  children?: NavChild[];
+}
+
+const navItems: SidebarItemConfig[] = [
   { label: 'Overview', href: '/dashboard', icon: <DashboardIcon fontSize="small" /> },
-  { label: 'Page 01', href: '/dashboard/page-01', icon: <ArticleIcon fontSize="small" /> },
-  { label: 'Page 02', href: '/dashboard/page-02', icon: <ExploreIcon fontSize="small" /> },
-  { label: 'Page 03', href: '/dashboard/page-03', icon: <BarChartIcon fontSize="small" /> },
+  {
+    label: 'Page 01',
+    icon: <ArticleIcon fontSize="small" />,
+    children: [
+      { label: 'Subpage 1.1', href: '/dashboard/page-01' },
+      { label: 'Subpage 1.2', href: '/dashboard/page-01-sub2' },
+    ],
+  },
+  {
+    label: 'Page 02',
+    icon: <ExploreIcon fontSize="small" />,
+    children: [
+      { label: 'Subpage 2.1', href: '/dashboard/page-02' },
+      { label: 'Subpage 2.2', href: '/dashboard/page-02-sub2' },
+    ],
+  },
+  {
+    label: 'Page 03',
+    icon: <BarChartIcon fontSize="small" />,
+    children: [
+      { label: 'Subpage 3.1', href: '/dashboard/page-03' },
+      { label: 'Subpage 3.2', href: '/dashboard/page-03-sub2' },
+    ],
+  },
   { label: 'Settings', href: '/dashboard/settings', icon: <SettingsIcon fontSize="small" /> },
 ];
 
@@ -34,7 +61,6 @@ export default function Sidebar({
   collapsed = false,
   isMobile = false,
 }: SidebarProps) {
-  const pathname = usePathname();
   const sidebarWidth = collapsed ? 72 : 260;
 
   return (
@@ -54,7 +80,7 @@ export default function Sidebar({
         transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* Header: Logo only — centered when collapsed */}
+      {/* Header: Logo only */}
       <Box
         sx={{
           display: 'flex',
@@ -104,18 +130,18 @@ export default function Sidebar({
         <Stack spacing={0.5} sx={{ width: '100%', alignItems: collapsed ? 'center' : 'stretch' }}>
           {navItems.map((item) => (
             <NavItem
-              key={item.href}
+              key={item.label}
               icon={item.icon}
               label={item.label}
               href={item.href}
-              active={pathname === item.href}
+              children={item.children}
               collapsed={collapsed}
             />
           ))}
         </Stack>
       </Box>
 
-      {/* User Profile footer — centered when collapsed */}
+      {/* User Profile footer */}
       <Box
         sx={{
           flexShrink: 0,

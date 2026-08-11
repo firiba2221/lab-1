@@ -30,11 +30,9 @@ export default function DarkModeToggle({ size = 'small' }: DarkModeToggleProps) 
         onClick={handleToggle}
         size={size}
         sx={{
-          border: '1px solid',
-          borderColor: 'divider',
           p: 0.9,
           color: 'text.secondary',
-          bgcolor: 'background.paper',
+          bgcolor: 'transparent',
           '&:hover': {
             color: 'text.primary',
             bgcolor: 'action.hover',
