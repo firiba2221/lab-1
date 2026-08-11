@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
@@ -16,7 +15,6 @@ export default function ContentPanel({ title, description }: ContentPanelProps) 
       elevation={0}
       sx={{
         p: 6,
-        borderRadius: 3,
         border: '1px solid',
         borderColor: 'divider',
         bgcolor: 'background.paper',

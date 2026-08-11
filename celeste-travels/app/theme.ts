@@ -41,80 +41,11 @@ const theme = createTheme({
   typography: {
     fontFamily: 'var(--font-geist-sans), Roboto, sans-serif',
   },
-  // Set cohesive small-level border radius base (8px)
-  shape: {
-    borderRadius: 8,
-  },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
           textTransform: 'none',
-        },
-        contained: {
-          borderRadius: 8,
-        },
-        outlined: {
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: 12,
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
-          },
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiChip: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiAlert: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiMenu: {
-      styleOverrides: {
-        paper: {
-          borderRadius: 10,
-        },
-      },
-    },
-    MuiPopover: {
-      styleOverrides: {
-        paper: {
-          borderRadius: 10,
         },
       },
     },

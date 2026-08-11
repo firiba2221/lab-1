@@ -54,7 +54,6 @@ export default function NavItem({
         gap: collapsed ? 0 : 1.5,
         px: collapsed ? 1 : 2,
         py: 1.2,
-        borderRadius: 1.25,
         textDecoration: 'none',
         color: styles.color,
         bgcolor: styles.bgcolor,

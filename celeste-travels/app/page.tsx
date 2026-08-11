@@ -34,7 +34,6 @@ function ActionCard({
       elevation={0}
       sx={{
         p: 3,
-        borderRadius: 2.5,
         border: "1px solid",
         borderColor: "divider",
         transition: "all 0.2s ease-in-out",
@@ -56,7 +55,7 @@ function ActionCard({
           color={color}
           fullWidth
           size="medium"
-          sx={{ textTransform: "none", borderRadius: 2 }}
+          sx={{ textTransform: "none" }}
         >
           {buttonLabel}
         </Button>
