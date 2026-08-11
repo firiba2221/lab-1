@@ -66,7 +66,7 @@ function ActionCard({
 
 export default function Home() {
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "grey.50", py: 10 }}>
+    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", bgcolor: "grey.50" }}>
       <Container maxWidth="md">
         <Stack spacing={4} sx={{ alignItems: "center", textAlign: "center" }}>
           {/* Shared Logo Component */}
@@ -78,38 +78,7 @@ export default function Home() {
             </Typography>
           </Box>
 
-          <Grid container spacing={2.5} sx={{ justifyContent: "center", maxWidth: 640, mt: 2 }}>
-            <Grid size={{ xs: 12, sm: 4 }}>
-              <ActionCard
-                icon={<LoginIcon color="primary" sx={{ fontSize: 32 }} />}
-                title="Login"
-                buttonLabel="Go to Login"
-                href="/login"
-                variant="contained"
-              />
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 4 }}>
-              <ActionCard
-                icon={<PersonAddIcon color="primary" sx={{ fontSize: 32 }} />}
-                title="Register"
-                buttonLabel="Go to Register"
-                href="/register"
-                variant="outlined"
-              />
-            </Grid>
-
-            <Grid size={{ xs: 12, sm: 4 }}>
-              <ActionCard
-                icon={<DashboardIcon color="primary" sx={{ fontSize: 32 }} />}
-                title="Dashboard"
-                buttonLabel="View Dashboard"
-                href="/dashboard"
-                variant="contained"
-                color="secondary"
-              />
-            </Grid>
-          </Grid>
+   
         </Stack>
       </Container>
     </Box>
