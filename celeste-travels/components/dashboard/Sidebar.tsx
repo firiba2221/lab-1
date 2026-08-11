@@ -26,52 +26,6 @@ interface SidebarProps {
   isMobile?: boolean;
 }
 
-// fallow-ignore-next-line complexity
-function SidebarHeader({
-  collapsed,
-  isMobile,
-  onToggleCollapse,
-}: {
-  collapsed: boolean;
-  isMobile: boolean;
-  onToggleCollapse?: () => void;
-}) {
-  return (
-    <Stack
-      direction="row"
-      sx={{
-        alignItems: 'center',
-        justify: collapsed ? 'center' : 'space-between',
-        mb: 3.5,
-        px: collapsed ? 0 : 0.5,
-        minHeight: 36,
-      }}
-    >
-      <Logo size="medium" showText={!collapsed} href="/dashboard" />
-
-      {!isMobile && onToggleCollapse && (
-        <Tooltip title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} placement="right">
-          <IconButton
-            size="small"
-            onClick={onToggleCollapse}
-            sx={{
-              color: 'text.secondary',
-              border: '1px solid',
-              borderColor: 'divider',
-              borderRadius: 1.5,
-              p: 0.5,
-              ml: collapsed ? 0 : 1,
-              '&:hover': { bgcolor: 'action.hover', color: 'text.primary' },
-            }}
-          >
-            {collapsed ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-          </IconButton>
-        </Tooltip>
-      )}
-    </Stack>
-  );
-}
-
 const navItems = [
   { label: 'Overview', href: '/dashboard', icon: <DashboardIcon fontSize="small" /> },
   { label: 'Page 01', href: '/dashboard/page-01', icon: <ArticleIcon fontSize="small" /> },
@@ -88,35 +42,78 @@ export default function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
 
+  const sidebarWidth = collapsed ? 72 : 260;
+
   return (
     <Box
       component="aside"
       sx={{
-        width: collapsed ? 72 : 260,
+        width: sidebarWidth,
         flexShrink: 0,
         bgcolor: 'background.paper',
-        borderRight: isMobile ? 'none' : '1px solid',
+        borderRight: '1px solid',
         borderColor: 'divider',
         display: 'flex',
         flexDirection: 'column',
-        justify: 'space-between',
-        p: collapsed ? 1.5 : 2.5,
-        position: isMobile ? 'static' : 'sticky',
-        top: 0,
-        height: '100vh',
+        height: '100%',
         boxSizing: 'border-box',
-        zIndex: 10,
-        overflowY: 'auto',
-        transition: 'width 0.2s cubic-bezier(0.4, 0, 0.2, 1), padding 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        overflow: 'hidden',
+        transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      <Box>
-        <SidebarHeader
-          collapsed={collapsed}
-          isMobile={isMobile}
-          onToggleCollapse={onToggleCollapse}
-        />
+      {/* Header: Logo + collapse toggle */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: collapsed ? 'center' : 'space-between',
+          px: collapsed ? 1.5 : 2.5,
+          py: 0,
+          height: 64, // match topbar height
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+          flexShrink: 0,
+        }}
+      >
+        <Logo size="medium" showText={!collapsed} href="/dashboard" />
 
+        {!isMobile && onToggleCollapse && (
+          <Tooltip title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} placement="right">
+            <IconButton
+              size="small"
+              onClick={onToggleCollapse}
+              sx={{
+                color: 'text.secondary',
+                border: '1px solid',
+                borderColor: 'divider',
+                borderRadius: 1.5,
+                p: 0.5,
+                ml: collapsed ? 0 : 1,
+                flexShrink: 0,
+                '&:hover': { bgcolor: 'action.hover', color: 'text.primary' },
+              }}
+            >
+              {collapsed ? (
+                <ChevronRightIcon fontSize="small" />
+              ) : (
+                <ChevronLeftIcon fontSize="small" />
+              )}
+            </IconButton>
+          </Tooltip>
+        )}
+      </Box>
+
+      {/* Navigation items — scrollable middle section */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          px: collapsed ? 1.5 : 2.5,
+          pt: 2.5,
+          pb: 1,
+        }}
+      >
         {!collapsed && (
           <Typography
             variant="caption"
@@ -149,7 +146,18 @@ export default function Sidebar({
         </Stack>
       </Box>
 
-      <UserProfile collapsed={collapsed} />
+      {/* User Profile footer — pinned at bottom */}
+      <Box
+        sx={{
+          flexShrink: 0,
+          px: collapsed ? 1.5 : 2.5,
+          py: 2,
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <UserProfile collapsed={collapsed} />
+      </Box>
     </Box>
   );
 }

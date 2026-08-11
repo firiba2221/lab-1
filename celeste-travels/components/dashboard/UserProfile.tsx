@@ -35,44 +35,54 @@ export default function UserProfile({ collapsed = false }: UserProfileProps) {
     <Avatar
       alt="Riley Carter"
       src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-      sx={{ width: 36, height: 36 }}
+      sx={{ width: 36, height: 36, flexShrink: 0 }}
     />
   );
 
   return (
-    <Box sx={{ pt: 1 }}>
-      <Stack
-        direction="row"
-        sx={{
-          alignItems: 'center',
-          justify: collapsed ? 'center' : 'space-between',
-        }}
-      >
-        {collapsed ? (
-          <Tooltip title="Riley Carter (riley@email.com)" placement="right" arrow>
-            <IconButton onClick={handleClick} size="small" sx={{ p: 0.5 }}>
+    <Box sx={{ pt: 2 }}>
+      {collapsed ? (
+        /* Collapsed: center the avatar button */
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Tooltip title="Riley Carter — riley@email.com" placement="right" arrow>
+            <IconButton onClick={handleClick} size="small" sx={{ p: 0 }}>
               {avatarNode}
             </IconButton>
           </Tooltip>
-        ) : (
-          <>
-            <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
-              {avatarNode}
-              <Box>
-                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.825rem', lineHeight: 1.2 }}>
-                  Riley Carter
-                </Typography>
-                <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.725rem' }}>
-                  riley@email.com
-                </Typography>
-              </Box>
-            </Stack>
-            <IconButton size="small" aria-label="user options" onClick={handleClick}>
-              <MoreVertIcon fontSize="small" color="action" />
-            </IconButton>
-          </>
-        )}
-      </Stack>
+        </Box>
+      ) : (
+        /* Expanded: avatar + name + options button */
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 1,
+          }}
+        >
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', minWidth: 0 }}>
+            {avatarNode}
+            <Box sx={{ minWidth: 0 }}>
+              <Typography
+                variant="subtitle2"
+                sx={{ fontWeight: 600, fontSize: '0.825rem', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+              >
+                Riley Carter
+              </Typography>
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontSize: '0.725rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}
+              >
+                riley@email.com
+              </Typography>
+            </Box>
+          </Stack>
+          <IconButton size="small" aria-label="user options" onClick={handleClick} sx={{ flexShrink: 0 }}>
+            <MoreVertIcon fontSize="small" color="action" />
+          </IconButton>
+        </Stack>
+      )}
 
       <Menu
         id="profile-menu"

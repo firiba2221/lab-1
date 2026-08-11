@@ -32,35 +32,59 @@ export default function DashboardLayout({
   };
 
   return (
-    <Box sx={{ display: 'flex', bgcolor: 'grey.50', minHeight: '100vh' }}>
-      {/* Responsive Sidebar */}
-      {isMobile ? (
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleCloseMobile}
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 260 },
-          }}
-        >
-          <Sidebar isMobile />
-        </Drawer>
-      ) : (
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        overflow: 'hidden',
+        bgcolor: 'grey.50',
+      }}
+    >
+      {/* Desktop Sidebar — sticky, full-height column */}
+      {!isMobile && (
         <Sidebar
           collapsed={desktopCollapsed}
           onToggleCollapse={handleToggleDesktopCollapse}
         />
       )}
 
-      {/* Main Container Area */}
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-        {/* Topbar Component */}
+      {/* Mobile Drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleCloseMobile}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 260 },
+        }}
+      >
+        <Sidebar isMobile />
+      </Drawer>
+
+      {/* Right column: Topbar + scrollable content */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          minWidth: 0,
+          height: '100vh',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Sticky Topbar */}
         <Topbar onOpenMobile={handleOpenMobile} />
 
-        {/* Content Panel Area */}
-        <Box component="main" sx={{ flexGrow: 1, p: { xs: 2, sm: 4 } }}>
+        {/* Scrollable content area */}
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            overflowY: 'auto',
+            p: { xs: 2, sm: 3, md: 4 },
+          }}
+        >
           {children}
         </Box>
       </Box>
