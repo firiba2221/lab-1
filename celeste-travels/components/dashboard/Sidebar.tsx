@@ -39,19 +39,31 @@ function SidebarHeader({
   return (
     <Stack
       direction="row"
-      spacing={1.5}
       sx={{
         alignItems: 'center',
         justify: collapsed ? 'center' : 'space-between',
-        mb: 4,
+        mb: 3.5,
         px: collapsed ? 0 : 0.5,
+        minHeight: 36,
       }}
     >
       <Logo size="medium" showText={!collapsed} href="/dashboard" />
 
       {!isMobile && onToggleCollapse && (
         <Tooltip title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} placement="right">
-          <IconButton size="small" onClick={onToggleCollapse} sx={{ color: 'text.secondary' }}>
+          <IconButton
+            size="small"
+            onClick={onToggleCollapse}
+            sx={{
+              color: 'text.secondary',
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: 1.5,
+              p: 0.5,
+              ml: collapsed ? 0 : 1,
+              '&:hover': { bgcolor: 'action.hover', color: 'text.primary' },
+            }}
+          >
             {collapsed ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
           </IconButton>
         </Tooltip>
@@ -94,6 +106,7 @@ export default function Sidebar({
         height: '100vh',
         boxSizing: 'border-box',
         zIndex: 10,
+        overflowY: 'auto',
         transition: 'width 0.2s cubic-bezier(0.4, 0, 0.2, 1), padding 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >

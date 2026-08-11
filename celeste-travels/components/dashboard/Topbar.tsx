@@ -95,36 +95,44 @@ function NotificationPopover({
             border: '1px solid',
             borderColor: 'divider',
             boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
-            mt: 1,
+            mt: 1.5,
             overflow: 'hidden',
           },
         },
       }}
     >
-      <Stack
-        direction="row"
+      {/* Popover Header with proper space-between alignment */}
+      <Box
         sx={{
           p: 2,
           px: 2.5,
+          display: 'flex',
           alignItems: 'center',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           borderBottom: '1px solid',
           borderColor: 'divider',
+          gap: 2,
         }}
       >
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: '0.95rem' }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: '0.95rem', color: 'text.primary' }}>
           Notifications
         </Typography>
         {unreadCount > 0 && (
           <Button
             size="small"
             onClick={onMarkAllRead}
-            sx={{ textTransform: 'none', fontSize: '0.75rem', p: 0 }}
+            sx={{
+              textTransform: 'none',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              p: 0,
+              minWidth: 'auto',
+            }}
           >
             Mark all read
           </Button>
         )}
-      </Stack>
+      </Box>
 
       <List disablePadding>
         {mockNotifications.map((notif, idx) => (
@@ -200,14 +208,17 @@ export default function Topbar({ onOpenMobile }: TopbarProps) {
     <Box
       component="header"
       sx={{
-        py: 2,
-        px: { xs: 2, sm: 4 },
+        height: 64,
+        px: { xs: 2, sm: 3, md: 4 },
         bgcolor: 'background.paper',
         borderBottom: '1px solid',
         borderColor: 'divider',
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
-      <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+      <Stack direction="row" sx={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+        {/* Left Side: Mobile Menu Button + Breadcrumbs */}
         <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
           {onOpenMobile && (
             <IconButton
@@ -245,6 +256,7 @@ export default function Topbar({ onOpenMobile }: TopbarProps) {
           </Breadcrumbs>
         </Stack>
 
+        {/* Right Side: Notification Icon Button */}
         <IconButton
           aria-describedby={id}
           onClick={handleOpen}
