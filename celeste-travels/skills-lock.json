@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "material-ui-nextjs": {
+      "source": "mui/material-ui",
+      "sourceType": "github",
+      "skillPath": "skills/material-ui-nextjs/SKILL.md",
+      "computedHash": "dcee153b8af675ae22b01eb7bd73cab8484990f2889bd190bf5aca55107c67a7"
+    }
+  }
+}
