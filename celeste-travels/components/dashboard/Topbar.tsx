@@ -34,6 +34,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/dashboard/page-03': 'Subpage 3.1',
   '/dashboard/page-03-sub2': 'Subpage 3.2',
   '/dashboard/settings': 'Settings',
+  '/dashboard/platform': 'Platform',
 };
 
 const mockNotifications = [
@@ -262,7 +263,7 @@ export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggl
             </IconButton>
           )}
 
-          <Breadcrumbs separator=">" aria-label="breadcrumb">
+          <Breadcrumbs separator="/" aria-label="breadcrumb">
             <Typography
               component={Link}
               href="/dashboard"

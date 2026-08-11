@@ -10,6 +10,7 @@ import ArticleIcon from '@mui/icons-material/ArticleOutlined';
 import ExploreIcon from '@mui/icons-material/ExploreOutlined';
 import BarChartIcon from '@mui/icons-material/BarChartOutlined';
 import SettingsIcon from '@mui/icons-material/SettingsOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import Logo from '@/components/Logo';
 import NavItem, { NavChild } from './NavItem';
@@ -54,6 +55,7 @@ const navItems: SidebarItemConfig[] = [
     ],
   },
   { label: 'Settings', href: '/dashboard/settings', icon: <SettingsIcon fontSize="small" /> },
+  { label: 'Platform', href: '/dashboard/platform', icon: <InfoOutlinedIcon fontSize="small" /> },
 ];
 
 // fallow-ignore-next-line complexity
@@ -85,7 +87,7 @@ export default function Sidebar({
         sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: collapsed ? 'center' : 'flex-start',
+          justify: collapsed ? 'center' : 'flex-start',
           px: collapsed ? 0 : 2.5,
           height: 64,
           borderBottom: '1px solid',
