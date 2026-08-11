@@ -13,10 +13,29 @@ test('screenshot - dashboard light mode', async ({ page }) => {
 test('screenshot - dashboard dark mode', async ({ page }) => {
   await page.goto('/dashboard');
   await page.waitForLoadState('networkidle');
-  // Click the dark mode toggle
   await page.getByRole('button', { name: /switch to dark mode/i }).click();
   await page.waitForTimeout(500);
   await page.screenshot({ path: `${screenshotDir}/dashboard-dark.png`, fullPage: true });
+  expect(true).toBe(true);
+});
+
+test('screenshot - collapse and expand sidebar', async ({ page }) => {
+  await page.goto('/dashboard');
+  await page.waitForLoadState('networkidle');
+
+  // Verify sidebar expanded state
+  await page.screenshot({ path: `${screenshotDir}/sidebar-expanded.png` });
+
+  // Click collapse button in topbar
+  await page.getByRole('button', { name: /collapse sidebar/i }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${screenshotDir}/sidebar-collapsed.png` });
+
+  // Click expand button in topbar to verify toggle back
+  await page.getByRole('button', { name: /expand sidebar/i }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${screenshotDir}/sidebar-reexpanded.png` });
+
   expect(true).toBe(true);
 });
 

@@ -50,13 +50,17 @@ export default function NavItem({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justify: collapsed ? 'center' : 'flex-start',
+        justifyContent: collapsed ? 'center' : 'flex-start',
         gap: collapsed ? 0 : 1.5,
-        px: collapsed ? 1 : 2,
-        py: 1.2,
+        width: collapsed ? 44 : '100%',
+        height: collapsed ? 44 : 'auto',
+        mx: collapsed ? 'auto' : 0,
+        px: collapsed ? 0 : 2,
+        py: collapsed ? 0 : 1.2,
         textDecoration: 'none',
         color: styles.color,
         bgcolor: styles.bgcolor,
+        boxSizing: 'border-box',
         transition: 'all 0.15s ease-in-out',
         '&:hover': {
           bgcolor: styles.hoverBg,
@@ -64,7 +68,7 @@ export default function NavItem({
         },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', color: 'inherit' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit' }}>
         {icon}
       </Box>
       {!collapsed && (

@@ -54,17 +54,18 @@ export default function Sidebar({
         transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* Header: Logo only — no collapse button here anymore */}
+      {/* Header: Logo only — centered when collapsed */}
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: collapsed ? 'center' : 'flex-start',
-          px: collapsed ? 1.5 : 2.5,
+          px: collapsed ? 0 : 2.5,
           height: 64,
           borderBottom: '1px solid',
           borderColor: 'divider',
           flexShrink: 0,
+          width: '100%',
         }}
       >
         <Logo size="medium" showText={!collapsed} href="/dashboard" />
@@ -76,9 +77,10 @@ export default function Sidebar({
           flexGrow: 1,
           overflowY: 'auto',
           overflowX: 'hidden',
-          px: collapsed ? 1.5 : 2.5,
+          px: collapsed ? 0 : 2.5,
           pt: 2.5,
           pb: 1,
+          width: '100%',
         }}
       >
         {!collapsed && (
@@ -99,7 +101,7 @@ export default function Sidebar({
           </Typography>
         )}
 
-        <Stack spacing={0.5}>
+        <Stack spacing={0.5} sx={{ width: '100%', alignItems: collapsed ? 'center' : 'stretch' }}>
           {navItems.map((item) => (
             <NavItem
               key={item.href}
@@ -113,12 +115,13 @@ export default function Sidebar({
         </Stack>
       </Box>
 
-      {/* User Profile footer — no border-top separator */}
+      {/* User Profile footer — centered when collapsed */}
       <Box
         sx={{
           flexShrink: 0,
-          px: collapsed ? 1.5 : 2.5,
+          px: collapsed ? 0 : 2.5,
           py: 2,
+          width: '100%',
         }}
       >
         <UserProfile collapsed={collapsed} />
