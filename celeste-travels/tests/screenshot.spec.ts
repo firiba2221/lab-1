@@ -3,6 +3,43 @@ import path from 'path';
 
 const screenshotDir = path.join(process.cwd(), 'playwright-screenshots');
 
+test('font verification - check Roboto font family on root and dashboard', async ({ page }) => {
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+
+  // Verify body computed font-family contains Roboto
+  const bodyFont = await page.evaluate(() => window.getComputedStyle(document.body).fontFamily);
+  console.log('Root body computed fontFamily:', bodyFont);
+  expect(bodyFont.toLowerCase()).toContain('roboto');
+
+  // Verify home page text computed font-family
+  const textFont = await page.evaluate(() => {
+    const el = document.querySelector('p, h1, h2, h3, h4, h5, h6, span');
+    return el ? window.getComputedStyle(el).fontFamily : '';
+  });
+  console.log('Root typography computed fontFamily:', textFont);
+  expect(textFont.toLowerCase()).toContain('roboto');
+
+  await page.screenshot({ path: `${screenshotDir}/font-check-home.png`, fullPage: true });
+
+  // Verify dashboard page font family
+  await page.goto('/dashboard');
+  await page.waitForLoadState('networkidle');
+
+  const dashboardBodyFont = await page.evaluate(() => window.getComputedStyle(document.body).fontFamily);
+  console.log('Dashboard body computed fontFamily:', dashboardBodyFont);
+  expect(dashboardBodyFont.toLowerCase()).toContain('roboto');
+
+  const headingFont = await page.evaluate(() => {
+    const h = document.querySelector('h5, h6, p');
+    return h ? window.getComputedStyle(h).fontFamily : '';
+  });
+  console.log('Dashboard heading computed fontFamily:', headingFont);
+  expect(headingFont.toLowerCase()).toContain('roboto');
+
+  await page.screenshot({ path: `${screenshotDir}/font-check-dashboard.png`, fullPage: true });
+});
+
 test('audit 1 - desktop expanded sidebar navigation', async ({ page }) => {
   await page.goto('/dashboard');
   await page.waitForLoadState('networkidle');
