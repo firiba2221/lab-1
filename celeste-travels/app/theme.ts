@@ -1,6 +1,8 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
 
+const FONT_ROBOTO = 'Roboto, var(--font-geist-sans), sans-serif';
+
 const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: 'class',
@@ -39,7 +41,20 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'var(--font-geist-sans), Roboto, sans-serif',
+    fontFamily: FONT_ROBOTO,
+    h1: { fontFamily: FONT_ROBOTO },
+    h2: { fontFamily: FONT_ROBOTO },
+    h3: { fontFamily: FONT_ROBOTO },
+    h4: { fontFamily: FONT_ROBOTO },
+    h5: { fontFamily: FONT_ROBOTO },
+    h6: { fontFamily: FONT_ROBOTO },
+    subtitle1: { fontFamily: FONT_ROBOTO },
+    subtitle2: { fontFamily: FONT_ROBOTO },
+    body1: { fontFamily: FONT_ROBOTO },
+    body2: { fontFamily: FONT_ROBOTO },
+    button: { fontFamily: FONT_ROBOTO },
+    caption: { fontFamily: FONT_ROBOTO },
+    overline: { fontFamily: FONT_ROBOTO },
   },
   components: {
     MuiButton: {

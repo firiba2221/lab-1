@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import Drawer from '@mui/material/Drawer';
@@ -27,31 +27,114 @@ export default function DeveloperPanel() {
   const showPanelEnv = process.env.NEXT_PUBLIC_SHOW_DEV_PANEL === 'true';
   const [open, setOpen] = useState(false);
 
+  // Position state for draggable floating button (x, y coordinates from top-left)
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const isDraggingRef = useRef(false);
+  const dragStartRef = useRef<{ startX: number; startY: number; posX: number; posY: number }>({
+    startX: 0,
+    startY: 0,
+    posX: 0,
+    posY: 0,
+  });
+
   if (!showPanelEnv) {
     return null;
   }
 
-  const handleOpen = () => setOpen(true);
+  const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+    // Only drag on primary pointer button
+    if (e.button !== 0) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const currentPosX = position ? position.x : rect.left;
+    const currentPosY = position ? position.y : rect.top;
+
+    dragStartRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      posX: currentPosX,
+      posY: currentPosY,
+    };
+
+    isDraggingRef.current = false;
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (!e.currentTarget.hasPointerCapture(e.pointerId)) return;
+
+    const deltaX = e.clientX - dragStartRef.current.startX;
+    const deltaY = e.clientY - dragStartRef.current.startY;
+
+    // If moved more than 4px, treat as drag
+    if (Math.hypot(deltaX, deltaY) > 4) {
+      isDraggingRef.current = true;
+    }
+
+    if (isDraggingRef.current) {
+      const buttonSize = 40; // compact Fab size
+      const maxLeft = window.innerWidth - buttonSize - 12;
+      const maxTop = window.innerHeight - buttonSize - 12;
+
+      const newX = Math.min(Math.max(12, dragStartRef.current.posX + deltaX), maxLeft);
+      const newY = Math.min(Math.max(12, dragStartRef.current.posY + deltaY), maxTop);
+
+      setPosition({ x: newX, y: newY });
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    // If not dragged, open panel
+    if (!isDraggingRef.current) {
+      setOpen(true);
+    }
+    isDraggingRef.current = false;
+  };
+
   const handleClose = () => setOpen(false);
+
+  // Position styles: custom coordinates when dragged, default bottom-right fixed when untouched
+  const fabPositionStyle = position
+    ? {
+        position: 'fixed',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        bottom: 'auto',
+        right: 'auto',
+      }
+    : {
+        position: 'fixed',
+        bottom: 24,
+        right: 24,
+      };
 
   return (
     <>
-      {/* Floating Developer Panel Action Button — anchored bottom-right so it never overlaps sidebar */}
-      <Tooltip title="Developer Panel" placement="left">
+      {/* Draggable Small Floating Developer Panel Button */}
+      <Tooltip title="Developer Panel (Drag to move)" placement="left">
         <Fab
           color="primary"
           aria-label="open developer panel"
-          onClick={handleOpen}
-          size="medium"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          size="small"
           sx={{
-            position: 'fixed',
-            bottom: 24,
-            right: 24,
+            ...fabPositionStyle,
             zIndex: 1200,
-            boxShadow: '0 8px 24px rgba(37, 99, 235, 0.35)',
+            touchAction: 'none',
+            cursor: 'grab',
+            '&:active': { cursor: 'grabbing' },
+            boxShadow: '0 6px 20px rgba(37, 99, 235, 0.35)',
+            width: 40,
+            height: 40,
+            minHeight: 40,
           }}
         >
-          <CodeIcon />
+          <CodeIcon fontSize="small" />
         </Fab>
       </Tooltip>
 
