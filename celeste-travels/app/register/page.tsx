@@ -12,11 +12,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import MuiLink from '@mui/material/Link';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from '@/components/Link';
+import Logo from '@/components/Logo';
 
 export default function RegisterPage() {
   return (
@@ -42,27 +42,14 @@ export default function RegisterPage() {
             boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
           }}
         >
-          {/* Header */}
+          {/* Header with Shared Logo */}
           <Stack spacing={1.5} sx={{ alignItems: 'center', textAlign: 'center', mb: 3 }}>
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: 2,
-                bgcolor: 'primary.main',
-                color: 'primary.contrastText',
-                display: 'flex',
-                alignItems: 'center',
-                justify: 'center',
-              }}
-            >
-              <FlightTakeoffIcon fontSize="medium" />
-            </Box>
-            <Typography variant="h5" component="h1" sx={{ fontWeight: 700 }}>
-              Create an Account
+            <Logo size="medium" href="/" />
+            <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mt: 1 }}>
+              Create an account
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Join Celeste Travels to unlock exclusive journeys
+              Join Celeste Travels for personalized trip recommendations
             </Typography>
           </Stack>
 
@@ -71,72 +58,75 @@ export default function RegisterPage() {
             <Button
               fullWidth
               variant="outlined"
-              color="inherit"
-              startIcon={<GoogleIcon fontSize="small" />}
-              sx={{ py: 1, textTransform: 'none', borderColor: 'divider' }}
+              startIcon={<GoogleIcon />}
+              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
             >
               Google
             </Button>
             <Button
               fullWidth
               variant="outlined"
-              color="inherit"
-              startIcon={<GitHubIcon fontSize="small" />}
-              sx={{ py: 1, textTransform: 'none', borderColor: 'divider' }}
+              startIcon={<GitHubIcon />}
+              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
             >
               GitHub
             </Button>
           </Stack>
 
-          <Divider sx={{ my: 2.5, color: 'text.secondary', fontSize: '0.8rem' }}>
-            OR SIGN UP WITH EMAIL
+          <Divider sx={{ mb: 3 }}>
+            <Typography variant="caption" color="text.secondary">
+              or sign up with email
+            </Typography>
           </Divider>
 
-          {/* Form */}
-          <Stack spacing={2}>
+          {/* Register Form */}
+          <Stack component="form" spacing={2.5} noValidate>
             <TextField
+              required
+              fullWidth
+              id="name"
               label="Full Name"
-              type="text"
-              placeholder="Alex Morgan"
-              fullWidth
+              name="name"
+              autoComplete="name"
+              autoFocus
               variant="outlined"
-              size="medium"
+              size="small"
+              slotProps={{ input: { sx: { borderRadius: 2 } } }}
             />
             <TextField
+              required
+              fullWidth
+              id="email"
               label="Email Address"
-              type="email"
-              placeholder="alex@example.com"
-              fullWidth
+              name="email"
+              autoComplete="email"
               variant="outlined"
-              size="medium"
+              size="small"
+              slotProps={{ input: { sx: { borderRadius: 2 } } }}
             />
             <TextField
+              required
+              fullWidth
+              name="password"
               label="Password"
               type="password"
-              placeholder="At least 8 characters"
-              fullWidth
+              id="password"
+              autoComplete="new-password"
               variant="outlined"
-              size="medium"
-            />
-            <TextField
-              label="Confirm Password"
-              type="password"
-              placeholder="Repeat password"
-              fullWidth
-              variant="outlined"
-              size="medium"
+              size="small"
+              slotProps={{ input: { sx: { borderRadius: 2 } } }}
             />
 
             <FormControlLabel
-              control={<Checkbox size="small" />}
+              control={<Checkbox value="agree" color="primary" size="small" />}
               label={
                 <Typography variant="body2" color="text.secondary">
                   I agree to the{' '}
-                  <MuiLink color="primary" underline="hover" href="#">
+                  <MuiLink underline="hover" color="primary" sx={{ cursor: 'pointer' }}>
                     Terms of Service
                   </MuiLink>{' '}
                   and{' '}
-                  <MuiLink color="primary" underline="hover" href="#">
+                  <MuiLink underline="hover" color="primary" sx={{ cursor: 'pointer' }}>
                     Privacy Policy
                   </MuiLink>
                 </Typography>
@@ -144,27 +134,29 @@ export default function RegisterPage() {
             />
 
             <Button
+              component={Link}
+              href="/dashboard"
+              type="submit"
               fullWidth
               variant="contained"
-              size="large"
-              startIcon={<PersonAddIcon />}
-              sx={{ py: 1.2, fontWeight: 600, textTransform: 'none', borderRadius: 2, mt: 1 }}
+              endIcon={<ArrowForwardIcon />}
+              sx={{
+                py: 1.2,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '0.925rem',
+              }}
             >
               Create Account
             </Button>
           </Stack>
 
           {/* Footer */}
-          <Box sx={{ mt: 3.5, textAlign: 'center' }}>
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2" color="text.secondary">
               Already have an account?{' '}
-              <MuiLink
-                component={Link}
-                href="/login"
-                color="primary"
-                underline="hover"
-                sx={{ fontWeight: 600 }}
-              >
+              <MuiLink component={Link} href="/login" underline="hover" color="primary" sx={{ fontWeight: 600 }}>
                 Sign in
               </MuiLink>
             </Typography>

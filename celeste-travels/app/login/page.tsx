@@ -12,11 +12,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import MuiLink from '@mui/material/Link';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from '@/components/Link';
+import Logo from '@/components/Logo';
 
 export default function LoginPage() {
   return (
@@ -42,23 +42,10 @@ export default function LoginPage() {
             boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
           }}
         >
-          {/* Header */}
+          {/* Header with Shared Logo */}
           <Stack spacing={1.5} sx={{ alignItems: 'center', textAlign: 'center', mb: 3 }}>
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: 2,
-                bgcolor: 'primary.main',
-                color: 'primary.contrastText',
-                display: 'flex',
-                alignItems: 'center',
-                justify: 'center',
-              }}
-            >
-              <FlightTakeoffIcon fontSize="medium" />
-            </Box>
-            <Typography variant="h5" component="h1" sx={{ fontWeight: 700 }}>
+            <Logo size="medium" href="/" />
+            <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mt: 1 }}>
               Welcome back
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -71,78 +58,88 @@ export default function LoginPage() {
             <Button
               fullWidth
               variant="outlined"
-              color="inherit"
-              startIcon={<GoogleIcon fontSize="small" />}
-              sx={{ py: 1, textTransform: 'none', borderColor: 'divider' }}
+              startIcon={<GoogleIcon />}
+              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
             >
               Google
             </Button>
             <Button
               fullWidth
               variant="outlined"
-              color="inherit"
-              startIcon={<GitHubIcon fontSize="small" />}
-              sx={{ py: 1, textTransform: 'none', borderColor: 'divider' }}
+              startIcon={<GitHubIcon />}
+              sx={{ textTransform: 'none', borderRadius: 2, borderColor: 'divider', color: 'text.primary' }}
             >
               GitHub
             </Button>
           </Stack>
 
-          <Divider sx={{ my: 2.5, color: 'text.secondary', fontSize: '0.8rem' }}>
-            OR CONTINUE WITH EMAIL
+          <Divider sx={{ mb: 3 }}>
+            <Typography variant="caption" color="text.secondary">
+              or sign in with email
+            </Typography>
           </Divider>
 
-          {/* Form */}
-          <Stack spacing={2.5}>
+          {/* Login Form */}
+          <Stack component="form" spacing={2.5} noValidate>
             <TextField
-              label="Email Address"
-              type="email"
-              placeholder="alex@example.com"
+              required
               fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
               variant="outlined"
-              size="medium"
+              size="small"
+              slotProps={{ input: { sx: { borderRadius: 2 } } }}
             />
             <TextField
+              required
+              fullWidth
+              name="password"
               label="Password"
               type="password"
-              placeholder="••••••••"
-              fullWidth
+              id="password"
+              autoComplete="current-password"
               variant="outlined"
-              size="medium"
+              size="small"
+              slotProps={{ input: { sx: { borderRadius: 2 } } }}
             />
 
-            <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+            <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
               <FormControlLabel
-                control={<Checkbox size="small" defaultChecked />}
+                control={<Checkbox value="remember" color="primary" size="small" />}
                 label={<Typography variant="body2">Remember me</Typography>}
               />
-              <MuiLink variant="body2" color="primary" underline="hover" href="#" sx={{ fontWeight: 500 }}>
+              <MuiLink underline="hover" color="primary" sx={{ fontSize: '0.825rem', fontWeight: 600, cursor: 'pointer' }}>
                 Forgot password?
               </MuiLink>
             </Stack>
 
             <Button
+              component={Link}
+              href="/dashboard"
+              type="submit"
               fullWidth
               variant="contained"
-              size="large"
               endIcon={<ArrowForwardIcon />}
-              sx={{ py: 1.2, fontWeight: 600, textTransform: 'none', borderRadius: 2 }}
+              sx={{
+                py: 1.2,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '0.925rem',
+              }}
             >
               Sign In
             </Button>
           </Stack>
 
           {/* Footer */}
-          <Box sx={{ mt: 3.5, textAlign: 'center' }}>
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2" color="text.secondary">
-              Don&apos;t have an account?{' '}
-              <MuiLink
-                component={Link}
-                href="/register"
-                color="primary"
-                underline="hover"
-                sx={{ fontWeight: 600 }}
-              >
+              Don't have an account?{' '}
+              <MuiLink component={Link} href="/register" underline="hover" color="primary" sx={{ fontWeight: 600 }}>
                 Sign up
               </MuiLink>
             </Typography>

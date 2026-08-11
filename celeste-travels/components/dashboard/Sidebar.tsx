@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { usePathname } from 'next/navigation';
 
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import DashboardIcon from '@mui/icons-material/DashboardOutlined';
 import ArticleIcon from '@mui/icons-material/ArticleOutlined';
 import ExploreIcon from '@mui/icons-material/ExploreOutlined';
@@ -17,6 +16,7 @@ import SettingsIcon from '@mui/icons-material/SettingsOutlined';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+import Logo from '@/components/Logo';
 import NavItem from './NavItem';
 import UserProfile from './UserProfile';
 
@@ -47,36 +47,7 @@ function SidebarHeader({
         px: collapsed ? 0 : 0.5,
       }}
     >
-      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
-        <Box
-          sx={{
-            width: 38,
-            height: 38,
-            borderRadius: 2,
-            bgcolor: 'primary.main',
-            color: 'primary.contrastText',
-            display: 'flex',
-            alignItems: 'center',
-            justify: 'center',
-            flexShrink: 0,
-          }}
-        >
-          <FlightTakeoffIcon fontSize="small" />
-        </Box>
-        {!collapsed && (
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 700,
-              fontSize: '1.05rem',
-              color: 'text.primary',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Celeste Travels
-          </Typography>
-        )}
-      </Stack>
+      <Logo size="medium" showText={!collapsed} href="/dashboard" />
 
       {!isMobile && onToggleCollapse && (
         <Tooltip title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'} placement="right">

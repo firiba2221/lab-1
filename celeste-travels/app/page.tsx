@@ -5,11 +5,11 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Link from "@/components/Link";
+import Logo from "@/components/Logo";
 
 interface ActionCardProps {
   icon: React.ReactNode;
@@ -69,26 +69,10 @@ export default function Home() {
     <Box sx={{ minHeight: "100vh", bgcolor: "grey.50", py: 10 }}>
       <Container maxWidth="md">
         <Stack spacing={4} sx={{ alignItems: "center", textAlign: "center" }}>
-          <Box
-            sx={{
-              width: 64,
-              height: 64,
-              borderRadius: 3,
-              bgcolor: "primary.main",
-              color: "primary.contrastText",
-              display: "flex",
-              alignItems: "center",
-              justify: "center",
-              boxShadow: "0 10px 25px rgba(25, 118, 210, 0.3)",
-            }}
-          >
-            <FlightTakeoffIcon sx={{ fontSize: 36 }} />
-          </Box>
+          {/* Shared Logo Component */}
+          <Logo size="large" variant="vertical" iconSize={64} fontSize="2.2rem" />
 
           <Box>
-            <Typography variant="h3" component="h1" sx={{ fontWeight: 800, mb: 1.5 }}>
-              Celeste Travels
-            </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ fontWeight: 400, maxWidth: 540, mx: "auto" }}>
               Explore destinations, manage itineraries, and experience seamless travel powered by Material UI & Next.js.
             </Typography>
