@@ -41,36 +41,36 @@ const theme = createTheme({
   typography: {
     fontFamily: 'var(--font-geist-sans), Roboto, sans-serif',
   },
-  // Set global border radius to 4px — no pill/rounded shapes
+  // Set cohesive small-level border radius base (8px)
   shape: {
-    borderRadius: 4,
+    borderRadius: 8,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
           textTransform: 'none',
         },
         contained: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
         outlined: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 6,
+          borderRadius: 12,
         },
       },
     },
@@ -78,7 +78,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            borderRadius: 4,
+            borderRadius: 8,
           },
         },
       },
@@ -86,35 +86,35 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
       },
     },
     MuiAlert: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
         },
       },
     },
     MuiMenu: {
       styleOverrides: {
         paper: {
-          borderRadius: 6,
+          borderRadius: 10,
         },
       },
     },
     MuiPopover: {
       styleOverrides: {
         paper: {
-          borderRadius: 6,
+          borderRadius: 10,
         },
       },
     },
