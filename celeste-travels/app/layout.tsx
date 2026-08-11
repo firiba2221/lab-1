@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
+import DeveloperPanel from "@/components/DeveloperPanel";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             {children}
+            <DeveloperPanel />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
