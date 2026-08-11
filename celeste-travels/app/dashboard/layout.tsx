@@ -40,12 +40,9 @@ export default function DashboardLayout({
         bgcolor: 'grey.50',
       }}
     >
-      {/* Desktop Sidebar — sticky, full-height column */}
+      {/* Desktop Sidebar */}
       {!isMobile && (
-        <Sidebar
-          collapsed={desktopCollapsed}
-          onToggleCollapse={handleToggleDesktopCollapse}
-        />
+        <Sidebar collapsed={desktopCollapsed} />
       )}
 
       {/* Mobile Drawer */}
@@ -62,7 +59,7 @@ export default function DashboardLayout({
         <Sidebar isMobile />
       </Drawer>
 
-      {/* Right column: Topbar + scrollable content */}
+      {/* Right column: Topbar (with collapse toggle) + scrollable content */}
       <Box
         sx={{
           flexGrow: 1,
@@ -73,10 +70,12 @@ export default function DashboardLayout({
           overflow: 'hidden',
         }}
       >
-        {/* Sticky Topbar */}
-        <Topbar onOpenMobile={handleOpenMobile} />
+        <Topbar
+          onOpenMobile={handleOpenMobile}
+          sidebarCollapsed={desktopCollapsed}
+          onToggleSidebar={handleToggleDesktopCollapse}
+        />
 
-        {/* Scrollable content area */}
         <Box
           component="main"
           sx={{

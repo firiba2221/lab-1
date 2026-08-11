@@ -19,6 +19,10 @@ interface UserProfileProps {
   collapsed?: boolean;
 }
 
+const USER_NAME = 'Riley Carter';
+const USER_EMAIL = 'riley@email.com';
+const USER_INITIALS = 'RC';
+
 export default function UserProfile({ collapsed = false }: UserProfileProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -33,25 +37,35 @@ export default function UserProfile({ collapsed = false }: UserProfileProps) {
 
   const avatarNode = (
     <Avatar
-      alt="Riley Carter"
-      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-      sx={{ width: 36, height: 36, flexShrink: 0 }}
-    />
+      alt={USER_NAME}
+      sx={{
+        width: 36,
+        height: 36,
+        bgcolor: 'primary.main',
+        color: 'primary.contrastText',
+        fontSize: '0.75rem',
+        fontWeight: 700,
+        letterSpacing: '0.04em',
+        flexShrink: 0,
+      }}
+    >
+      {USER_INITIALS}
+    </Avatar>
   );
 
   return (
-    <Box sx={{ pt: 2 }}>
+    <Box>
       {collapsed ? (
-        /* Collapsed: center the avatar button */
+        /* Collapsed: centered initials avatar */
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Tooltip title="Riley Carter — riley@email.com" placement="right" arrow>
+          <Tooltip title={`${USER_NAME} — ${USER_EMAIL}`} placement="right" arrow>
             <IconButton onClick={handleClick} size="small" sx={{ p: 0 }}>
               {avatarNode}
             </IconButton>
           </Tooltip>
         </Box>
       ) : (
-        /* Expanded: avatar + name + options button */
+        /* Expanded: initials avatar + name/email + options button */
         <Stack
           direction="row"
           sx={{
@@ -65,16 +79,29 @@ export default function UserProfile({ collapsed = false }: UserProfileProps) {
             <Box sx={{ minWidth: 0 }}>
               <Typography
                 variant="subtitle2"
-                sx={{ fontWeight: 600, fontSize: '0.825rem', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                sx={{
+                  fontWeight: 600,
+                  fontSize: '0.825rem',
+                  lineHeight: 1.2,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
               >
-                Riley Carter
+                {USER_NAME}
               </Typography>
               <Typography
                 variant="caption"
                 color="text.secondary"
-                sx={{ fontSize: '0.725rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}
+                sx={{
+                  fontSize: '0.725rem',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: 'block',
+                }}
               >
-                riley@email.com
+                {USER_EMAIL}
               </Typography>
             </Box>
           </Stack>

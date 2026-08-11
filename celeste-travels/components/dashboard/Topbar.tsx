@@ -13,7 +13,10 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import HotelIcon from '@mui/icons-material/Hotel';
@@ -22,6 +25,7 @@ import Link from '@/components/Link';
 import { usePathname } from 'next/navigation';
 
 const PAGE_TITLES: Record<string, string> = {
+  '/dashboard': 'Home',
   '/dashboard/page-01': 'Page 01',
   '/dashboard/page-02': 'Page 02',
   '/dashboard/page-03': 'Page 03',
@@ -101,7 +105,6 @@ function NotificationPopover({
         },
       }}
     >
-      {/* Popover Header with proper space-between alignment */}
       <Box
         sx={{
           p: 2,
@@ -121,13 +124,7 @@ function NotificationPopover({
           <Button
             size="small"
             onClick={onMarkAllRead}
-            sx={{
-              textTransform: 'none',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              p: 0,
-              minWidth: 'auto',
-            }}
+            sx={{ textTransform: 'none', fontSize: '0.75rem', fontWeight: 600, p: 0, minWidth: 'auto' }}
           >
             Mark all read
           </Button>
@@ -179,10 +176,14 @@ function NotificationPopover({
 
 interface TopbarProps {
   onOpenMobile?: () => void;
+  /** Desktop: sidebar collapsed state — drives the toggle icon direction */
+  sidebarCollapsed?: boolean;
+  /** Desktop: callback to toggle sidebar collapse */
+  onToggleSidebar?: () => void;
 }
 
 // fallow-ignore-next-line complexity
-export default function Topbar({ onOpenMobile }: TopbarProps) {
+export default function Topbar({ onOpenMobile, sidebarCollapsed = false, onToggleSidebar }: TopbarProps) {
   const pathname = usePathname();
   const pageTitle = PAGE_TITLES[pathname] ?? 'Home';
 
@@ -209,17 +210,46 @@ export default function Topbar({ onOpenMobile }: TopbarProps) {
       component="header"
       sx={{
         height: 64,
-        px: { xs: 2, sm: 3, md: 4 },
+        px: { xs: 2, sm: 3 },
         bgcolor: 'background.paper',
         borderBottom: '1px solid',
         borderColor: 'divider',
         display: 'flex',
         alignItems: 'center',
+        flexShrink: 0,
       }}
     >
       <Stack direction="row" sx={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-        {/* Left Side: Mobile Menu Button + Breadcrumbs */}
-        <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+
+        {/* Left side: collapse toggle (desktop) | hamburger (mobile) | breadcrumbs */}
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+
+          {/* Desktop sidebar collapse/expand button — now lives in topbar */}
+          {onToggleSidebar && (
+            <Tooltip title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
+              <IconButton
+                aria-label={sidebarCollapsed ? 'expand sidebar' : 'collapse sidebar'}
+                onClick={onToggleSidebar}
+                size="small"
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  borderRadius: 2,
+                  p: 0.8,
+                  color: 'text.secondary',
+                  '&:hover': { color: 'text.primary', bgcolor: 'action.hover' },
+                }}
+              >
+                {sidebarCollapsed
+                  ? <ChevronRightIcon fontSize="small" />
+                  : <ChevronLeftIcon fontSize="small" />
+                }
+              </IconButton>
+            </Tooltip>
+          )}
+
+          {/* Mobile hamburger menu */}
           {onOpenMobile && (
             <IconButton
               aria-label="open mobile drawer"
@@ -256,7 +286,7 @@ export default function Topbar({ onOpenMobile }: TopbarProps) {
           </Breadcrumbs>
         </Stack>
 
-        {/* Right Side: Notification Icon Button */}
+        {/* Right side: Notification button */}
         <IconButton
           aria-describedby={id}
           onClick={handleOpen}
